@@ -26,7 +26,7 @@
         android:ellipsize="end"
         android:lines="1"
         android:singleLine="true"
-        android:text="@sample/posts.json/data/author"
+        android:text="@string/author"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/published"
         app:layout_constraintEnd_toStartOf="@id/menu"
@@ -65,21 +65,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
         android:background="@android:color/transparent"
+        android:contentDescription="@null"
         app:layout_constraintEnd_toStartOf="@id/heartTextView"
         app:layout_constraintTop_toTopOf="@id/barrier1"
-        app:srcCompat="@drawable/baseline_favorite_border_24"
-        android:contentDescription="@null" />
+        app:srcCompat="@drawable/baseline_favorite_border_24" />
 
     <TextView
         android:id="@+id/heartTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
-        android:text="@sample/posts.json/data/likes"
+        android:text="25"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@id/heart"
-        app:layout_constraintTop_toTopOf="@id/barrier1"
-        />
+        app:layout_constraintTop_toTopOf="@id/barrier1" />
 
     <TextView
         android:id="@+id/content"
@@ -87,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
         android:autoLink="web"
-        android:text="@sample/posts.json/data/content"
+        android:text="@string/content"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,25 +96,23 @@
         android:id="@+id/eyes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="@dimen/indent"
+        android:layout_marginTop="@dimen/common_spacing"
         android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@null"
+        app:layout_constraintEnd_toStartOf="@id/eyesTextView"
         app:layout_constraintTop_toTopOf="@id/barrier1"
-        app:srcCompat="@drawable/baseline_remove_red_eye_24"
-        android:contentDescription="@null" />
+        app:srcCompat="@drawable/baseline_remove_red_eye_24" />
 
     <TextView
         android:id="@+id/eyesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="@dimen/common_spacing"
-        android:text="@sample/posts.json/data/viewing"
+        android:text="100К"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@id/eyes"
-        app:layout_constraintTop_toTopOf="@id/barrier1"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/barrier1" />
 
     <ImageButton
         android:id="@+id/share"
@@ -124,10 +121,10 @@
         android:layout_marginStart="@dimen/indent"
         android:layout_marginTop="@dimen/common_spacing"
         android:background="@android:color/transparent"
+        android:contentDescription="@null"
         app:layout_constraintStart_toEndOf="@id/heartTextView"
         app:layout_constraintTop_toTopOf="@id/barrier1"
-        app:srcCompat="@drawable/baseline_share_24"
-        android:contentDescription="@null" />
+        app:srcCompat="@drawable/baseline_share_24" />
 
     <TextView
         android:id="@+id/shareTextView"
@@ -135,11 +132,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="@dimen/common_spacing"
-        android:text="@sample/posts.json/data/repost"
+        android:text="20"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@id/share"
-        app:layout_constraintTop_toTopOf="@id/barrier1"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toTopOf="@id/barrier1" />
 
     <TextView
         android:id="@+id/published"
@@ -147,7 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/common_spacing"
         android:layout_marginEnd="@dimen/common_spacing"
-        android:text="@sample/posts.json/data/published"
+        android:text="@string/time"
         app:layout_constraintBottom_toBottomOf="@id/barrier"
         app:layout_constraintEnd_toStartOf="@id/menu"
         app:layout_constraintStart_toEndOf="@id/avatar"
