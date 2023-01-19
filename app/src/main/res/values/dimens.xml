@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="common_spacing">14dp</dimen>
+    <dimen name="avatar_size">46dp</dimen>
+    <dimen name="indent">30dp</dimen>
+
+</resources>
