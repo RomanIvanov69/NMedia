@@ -66,7 +66,7 @@
         android:layout_marginTop="@dimen/common_spacing"
         android:background="@android:color/transparent"
         android:contentDescription="@null"
-        app:layout_constraintEnd_toStartOf="@id/heartTextView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/barrier1"
         app:srcCompat="@drawable/baseline_favorite_border_24" />
 
@@ -75,9 +75,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
+        app:layout_constraintStart_toEndOf="@id/heart"
         android:text="25"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@id/heart"
         app:layout_constraintTop_toTopOf="@id/barrier1" />
 
     <TextView
@@ -107,7 +107,6 @@
         android:id="@+id/eyesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="@dimen/common_spacing"
         android:text="100К"
         android:textSize="20sp"
@@ -130,7 +129,7 @@
         android:id="@+id/shareTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="@dimen/common_spacing"
         android:text="20"
         android:textSize="20sp"
