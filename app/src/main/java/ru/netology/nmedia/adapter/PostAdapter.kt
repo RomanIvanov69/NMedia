@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
+import ru.netology.nmedia.clickCount
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 
@@ -29,7 +30,6 @@ class PostAdapter(
         holder.bind(heart)
     }
 
-
     class PostViewHolder(
         private val binding: CardPostBinding,
         private val onLikeListener: OnLikeListener,
@@ -41,7 +41,7 @@ class PostAdapter(
                 published.text = post.published
                 content.text = post.content
                 heart.setImageResource(
-                    if (post.likedByMe) R.drawable.baseline_favorite_border_24 else R.drawable.red_heart
+                    if (post.likedByMe) R.drawable.red_heart else R.drawable.baseline_favorite_border_24
                 )
                 heart.setOnClickListener {
                     onLikeListener(post)
@@ -49,6 +49,9 @@ class PostAdapter(
                 share.setOnClickListener {
                     onShareListener(post)
                 }
+                shareTextView.text = clickCount(post.shareCount)
+                heartTextView.text = clickCount(post.likeCount)
+                eyesTextView.text = clickCount(post.lookCount)
             }
         }
     }
