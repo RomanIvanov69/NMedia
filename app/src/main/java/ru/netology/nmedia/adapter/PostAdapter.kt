@@ -12,12 +12,12 @@ import ru.netology.nmedia.dto.Post
 import androidx.appcompat.widget.PopupMenu
 
 interface OnInteractionListener {
-    fun onLike(post: Post)
-    fun onEdit(post: Post)
-    fun onRemove(post: Post)
-    fun onShare(post: Post)
-    fun onEyes(post: Post)
-    fun onCancelEdit(post: Post)
+    fun onLike(post: Post) {}
+    fun onEdit(post: Post) {}
+    fun onRemove(post: Post) {}
+    fun onShare(post: Post) {}
+    fun onEyes(post: Post) {}
+    fun onCancelEdit(post: Post) {}
 }
 
 class PostAdapter(private val onInteractionListener: OnInteractionListener) :

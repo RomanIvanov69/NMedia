@@ -17,5 +17,7 @@ changes -> <a href="https://netology.ru">http://netolo.gy/fyb</a></string>
     <string name="edit">Change</string>
     <string name="remove">Delete</string>
     <string name="notEdit">Editing canceled</string>
+    <string name="post_content">Enter the text of the post</string>
+    <string name="empty_content">Content can`t be empty!</string>
 
 </resources>
