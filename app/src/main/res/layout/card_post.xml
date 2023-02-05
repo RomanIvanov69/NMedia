@@ -110,6 +110,7 @@
         android:layout_marginTop="@dimen/common_spacing"
         android:text=""
         android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="@id/eyes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/barrier1" />
 
@@ -152,7 +153,7 @@
         android:id="@+id/buttonsBarrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="bottom" />
+        app:barrierDirection="top" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

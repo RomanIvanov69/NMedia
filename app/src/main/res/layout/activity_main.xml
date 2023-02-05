@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
@@ -23,18 +23,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="content,save,notEdit" />
+        app:constraint_referenced_ids="edit_content,save_button,notEdit" />
 
     <EditText
-        android:id="@+id/content"
+        android:id="@+id/edit_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="70dp"
         android:hint="@string/post_content"
-        android:importantForAutofill="no"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/save"
+        app:layout_constraintEnd_toStartOf="@id/save_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolsTop" />
 
@@ -43,19 +44,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
-        app:layout_constraintBottom_toTopOf="@id/content" />
+        app:layout_constraintBottom_toTopOf="@id/edit_content" />
 
     <ImageButton
-        android:id="@+id/save"
+        android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:contentDescription="@string/post_content"
-        app:layout_constraintBottom_toBottomOf="@+id/content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/content"
-        app:layout_constraintTop_toTopOf="@+id/content"
-        app:layout_constraintVertical_bias="0.428"
         app:srcCompat="@drawable/baseline_check_circle_24" />
 
     <ImageButton
@@ -63,16 +61,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="@id/editText"
-        app:layout_constraintBottom_toTopOf="@id/save"
-        app:layout_goneMarginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/save_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/baseline_cancel_24" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/editGroup"
+        android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="editText,notEdit" />
+        app:constraint_referenced_ids="notEdit,editText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,6 +18,10 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.editContent.setOnClickListener{
+            binding.group.visibility = View.VISIBLE
+        }
+
         val viewModel: PostViewModel by viewModels()
         val adapter = PostAdapter(object : OnInteractionListener {
             override fun onShare(post: Post) {
@@ -37,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onEdit(post: Post) {
-                binding.editGroup.visibility = View.VISIBLE
                 viewModel.edit(post)
             }
 
@@ -54,13 +57,13 @@ class MainActivity : AppCompatActivity() {
         viewModel.edited.observe(this) { post ->
             if (post.id == 0L)
                 return@observe
-            with(binding.content) {
+            with(binding.editContent) {
                 requestFocus()
                 setText(post.content)
             }
 
-            binding.save.setOnClickListener {
-                with(binding.content) {
+            binding.saveButton.setOnClickListener {
+                with(binding.editContent) {
                     if (text.isNullOrBlank()) {
                         Toast.makeText(
                             this@MainActivity,
@@ -74,10 +77,12 @@ class MainActivity : AppCompatActivity() {
                         setText("")
                         clearFocus()
                         AndroidUtils.hideKeyboard(this)
+                        binding.group.visibility = View.GONE
                     }
                 }
                 binding.notEdit.setOnClickListener {
-                    with(binding.content) {
+                    binding.group.visibility = View.VISIBLE
+                    with(binding.editContent) {
                         if (text.isNotEmpty()) {
                             Toast.makeText(
                                 this@MainActivity,
@@ -88,8 +93,8 @@ class MainActivity : AppCompatActivity() {
                             viewModel.notEdit()
                             text.clear()
                             clearFocus()
-                            binding.editGroup.visibility = View.GONE
                             AndroidUtils.hideKeyboard(this)
+                            binding.group.visibility = View.GONE
                         } else {
                             Toast.makeText(
                                 this@MainActivity,
