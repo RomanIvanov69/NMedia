@@ -9,7 +9,7 @@
     <string name="edit">Редактировать</string>
     <string name="remove">Удалить</string>
     <string name="notEdit">Отменено редактирование</string>
-    <string name="post_content">Введите текст поста</string>
+    <string name="post_content">Текст поста</string>
     <string name="empty_content">Контент не может быть пустым!</string>
 
 </resources>

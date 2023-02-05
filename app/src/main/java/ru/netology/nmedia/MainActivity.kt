@@ -54,51 +54,50 @@ class MainActivity : AppCompatActivity() {
         viewModel.edited.observe(this) { post ->
             if (post.id == 0L)
                 return@observe
-        }
-        with(binding.content) {
-            requestFocus()
-            setText(post.content)
-        }
-
-        binding.save.setOnClickListener {
             with(binding.content) {
-                if (text.isNullOrBlank()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        context.getString(R.string.empty_content),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
-                }
-
-                viewModel.editContent(text.toString())
-                viewModel.save()
-
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyboard(this)
+                requestFocus()
+                setText(post.content)
             }
-        }
-        binding.notEdit.setOnClickListener {
-            with(binding.content) {
-                if (text.isNotEmpty()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        context.getString(R.string.notEdit),
-                        Toast.LENGTH_SHORT
-                    ).show()
 
-                    viewModel.notEdit()
-                    text.clear()
-                    clearFocus()
-                    binding.editGroup.visibility = View.GONE
-                    AndroidUtils.hideKeyboard(this)
-                } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        context.getString(R.string.empty_content),
-                        Toast.LENGTH_SHORT
-                    ).show()
+            binding.save.setOnClickListener {
+                with(binding.content) {
+                    if (text.isNullOrBlank()) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            context.getString(R.string.empty_content),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        viewModel.editContent(text.toString())
+                        viewModel.save()
+
+                        setText("")
+                        clearFocus()
+                        AndroidUtils.hideKeyboard(this)
+                    }
+                }
+                binding.notEdit.setOnClickListener {
+                    with(binding.content) {
+                        if (text.isNotEmpty()) {
+                            Toast.makeText(
+                                this@MainActivity,
+                                context.getString(R.string.notEdit),
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            viewModel.notEdit()
+                            text.clear()
+                            clearFocus()
+                            binding.editGroup.visibility = View.GONE
+                            AndroidUtils.hideKeyboard(this)
+                        } else {
+                            Toast.makeText(
+                                this@MainActivity,
+                                context.getString(R.string.empty_content),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
                 }
             }
         }
