@@ -9,62 +9,85 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.clickCount
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
+import androidx.appcompat.widget.PopupMenu
 
-typealias OnLikeListener = (post: Post) -> Unit
-typealias OnShareListener = (post: Post) -> Unit
+interface OnInteractionListener {
+    fun onLike(post: Post) {}
+    fun onEdit(post: Post) {}
+    fun onRemove(post: Post) {}
+    fun onShare(post: Post) {}
+    fun onEyes(post: Post) {}
+    fun onCancelEdit(post: Post) {}
+}
 
-class PostAdapter(
-    private val onLikeListener: OnLikeListener,
-    private val onShareListener: OnShareListener
-) :
-    ListAdapter<Post, PostAdapter.PostViewHolder>(PostDiffCallback()) {
+class PostAdapter(private val onInteractionListener: OnInteractionListener) :
+    ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onLikeListener, onShareListener)
+        return PostViewHolder(binding, onInteractionListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        val share = getItem(position)
-        holder.bind(share)
-        val heart = getItem(position)
-        holder.bind(heart)
+        val post = getItem(position)
+        holder.bind(post)
     }
+}
 
-    class PostViewHolder(
-        private val binding: CardPostBinding,
-        private val onLikeListener: OnLikeListener,
-        private val onShareListener: OnShareListener
-    ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(post: Post) {
-            binding.apply {
-                author.text = post.author
-                published.text = post.published
-                content.text = post.content
-                heart.setImageResource(
-                    if (post.likedByMe) R.drawable.red_heart else R.drawable.baseline_favorite_border_24
-                )
-                heart.setOnClickListener {
-                    onLikeListener(post)
-                }
-                share.setOnClickListener {
-                    onShareListener(post)
-                }
-                shareTextView.text = clickCount(post.shareCount)
-                heartTextView.text = clickCount(post.likeCount)
-                eyesTextView.text = clickCount(post.lookCount)
+class PostViewHolder(
+    private val binding: CardPostBinding,
+    private val onInteractionListener: OnInteractionListener,
+) : RecyclerView.ViewHolder(binding.root) {
+    fun bind(post: Post) {
+        binding.apply {
+            author.text = post.author
+            published.text = post.published
+            content.text = post.content
+            heart.setImageResource(
+                if (post.likedByMe) R.drawable.red_heart else R.drawable.baseline_favorite_border_24
+            )
+            heart.setOnClickListener {
+                onInteractionListener.onLike(post)
             }
-        }
-    }
-
-    class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
-        override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
-            return oldItem == newItem
+            share.setOnClickListener {
+                onInteractionListener.onShare(post)
+            }
+            eyes.setOnClickListener {
+                onInteractionListener.onEyes(post)
+            }
+            menu.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options_post)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                onInteractionListener.onRemove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                onInteractionListener.onEdit(post)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                }.show()
+            }
+            shareTextView.text = clickCount(post.shareCount)
+            heartTextView.text = clickCount(post.likeCount)
+            eyesTextView.text = clickCount(post.lookCount)
         }
     }
 }
+
+class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
+    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+        return oldItem == newItem
+    }
+}
+
 
 
