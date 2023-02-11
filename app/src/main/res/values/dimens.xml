@@ -4,7 +4,7 @@
     <dimen name="avatar_size">46dp</dimen>
     <dimen name="indent">30dp</dimen>
     <dimen name="icon_button_min_size">48dp</dimen>
-    <dimen name="menu_button_size">24dp</dimen>
+    <dimen name="menu_button_size">48dp</dimen>
     <dimen name="icon_button_padding">12dp</dimen>
 
 </resources>

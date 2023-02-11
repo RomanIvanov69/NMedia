@@ -45,6 +45,8 @@ class PostViewHolder(
 
             heart.isChecked = post.likedByMe
             heart.text = post.likeCount.toString()
+            eyes.text = post.lookCount.toString()
+            share.text = post.shareCount.toString()
 
             heart.setOnClickListener {
                 onInteractionListener.onLike(post)
@@ -73,8 +75,6 @@ class PostViewHolder(
                     }
                 }.show()
             }
-            shareTextView.text = clickCount(post.shareCount)
-            eyesTextView.text = clickCount(post.lookCount)
         }
     }
 }

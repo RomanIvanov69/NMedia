@@ -19,6 +19,5 @@ changes -> <a href="https://netology.ru">http://netolo.gy/fyb</a></string>
     <string name="notEdit">Editing canceled</string>
     <string name="post_content">Text of the post</string>
     <string name="empty_content">Content can`t be empty!</string>
-    <string name="description_heart" translatable="false">Post like</string>
 
 </resources>

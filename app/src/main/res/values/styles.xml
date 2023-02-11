@@ -9,8 +9,7 @@
     </style>
 
     <style name="Widget.App.LikeButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="iconTint">@color/widget_color</item>
-        <item name="icon">@drawable/baseline_favorite_border_24</item>
+        <item name="iconTint">@color/like_color</item>
         <item name="android:textColor">?attr/colorControlNormal</item>
         <item name="android:minWidth">@dimen/icon_button_min_size</item>
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
