@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.editContent.setOnClickListener{
+        binding.editContent.setOnClickListener {
             binding.group.visibility = View.VISIBLE
         }
 

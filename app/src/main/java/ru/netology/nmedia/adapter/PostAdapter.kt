@@ -42,9 +42,12 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            heart.setImageResource(
-                if (post.likedByMe) R.drawable.red_heart else R.drawable.baseline_favorite_border_24
-            )
+
+            heart.isChecked = post.likedByMe
+            heart.text = post.likeCount.toString()
+            eyes.text = post.lookCount.toString()
+            share.text = post.shareCount.toString()
+
             heart.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
@@ -72,9 +75,6 @@ class PostViewHolder(
                     }
                 }.show()
             }
-            shareTextView.text = clickCount(post.shareCount)
-            heartTextView.text = clickCount(post.likeCount)
-            eyesTextView.text = clickCount(post.lookCount)
         }
     }
 }
