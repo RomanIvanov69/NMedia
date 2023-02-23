@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.result.launch
 import androidx.activity.viewModels
 import kotlinx.android.synthetic.main.activity_new_post.*
+import kotlinx.android.synthetic.main.card_post.view.*
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostAdapter
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                 val shareIntent =
                     Intent.createChooser(intent, getString(R.string.chooser_share_post))
                 startActivity(shareIntent)
+                viewModel.likeById((post.id))
             }
 
             override fun onLike(post: Post) {
@@ -58,6 +60,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
+                newPostContract.launch(post.content)
             }
 
             override fun onCancelEdit(post: Post) {
@@ -68,10 +71,15 @@ class MainActivity : AppCompatActivity() {
         )
         binding.list.adapter = adapter
         viewModel.data.observe(this) { posts ->
-            adapter.submitList(posts)
+            val newPost = adapter.currentList.size < posts.size
+            adapter.submitList(posts) {
+                if (newPost) {
+                    binding.list.smoothScrollToPosition(0)
+                }
+            }
         }
         binding.add.setOnClickListener {
-            newPostContract.launch()
+            newPostContract.launch(null)
         }
     }
 }
