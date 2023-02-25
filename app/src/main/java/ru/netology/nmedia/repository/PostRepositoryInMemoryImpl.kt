@@ -15,7 +15,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likeCount = 0,
             shareCount = 50,
-            lookCount = 0
+            lookCount = 0,
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         ),
         Post(
             id = nextId++,
@@ -25,7 +26,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likeCount = 0,
             shareCount = 1500,
-            lookCount = 0
+            lookCount = 120,
+            video = "https://www.youtube.com/watch?v=tp2r5AsZtqI"
         ),
         Post(
             id = nextId++,
@@ -35,7 +37,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likeCount = 0,
             shareCount = 1_000_000,
-            lookCount = 0
+            lookCount = 0,
+            video = "https://www.youtube.com/watch?v=2Klsho6InoY"
         ),
         Post(
             id = nextId++,
@@ -44,8 +47,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
             published = "20 мая в 19:36",
             likedByMe = false,
             likeCount = 0,
-            shareCount = 0,
-            lookCount = 0
+            shareCount = 550,
+            lookCount = 100000,
+            video = "https://www.youtube.com/watch?v=2Klsho6InoY&list=PL3oD8lkROOGgaXnXMqATH4HPsGQwds_C4"
+
         ),
         Post(
             id = nextId++,
@@ -55,7 +60,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likeCount = 0,
             shareCount = 0,
-            lookCount = 0
+            lookCount = 0,
+            video = "https://www.youtube.com/watch?v=IHJJcXK7E_4"
         ),
         Post(
             id = nextId++,
@@ -85,7 +91,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likeCount = 0,
             shareCount = 0,
-            lookCount = 0
+            lookCount = 0,
+            video = "https://www.youtube.com/watch?v=qpQIWPidKb4"
+
         ),
         Post(
             id = nextId++,
@@ -93,11 +101,11 @@ class PostRepositoryInMemoryImpl : PostRepository {
             content = " Сколько раз вы пытались выучить английский, разобраться с Photoshop или освоить технику печати со скоростью тысяча символов в наносекунду? Любая учёба — объёмный и долгий процесс, который так и тянет прервать где-то на середине. Разбираемся, как организовать самостоятельное обучение, чтобы прийти к заветной цели",
             published = "15 мая в 18:36",
             likedByMe = false,
-            likeCount = 0,
+            likeCount = 11154,
             shareCount = 0,
-            lookCount = 0
+            lookCount = 150000
         ),
-    ).reversed()
+    )
 
     private val data = MutableLiveData(posts)
 

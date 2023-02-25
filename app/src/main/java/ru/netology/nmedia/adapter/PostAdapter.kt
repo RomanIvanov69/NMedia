@@ -1,6 +1,7 @@
 package ru.netology.nmedia.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -18,6 +19,7 @@ interface OnInteractionListener {
     fun onShare(post: Post) {}
     fun onEyes(post: Post) {}
     fun onCancelEdit(post: Post) {}
+    fun onPlayVideo(post: Post) {}
 }
 
 class PostAdapter(private val onInteractionListener: OnInteractionListener) :
@@ -44,9 +46,15 @@ class PostViewHolder(
             content.text = post.content
 
             heart.isChecked = post.likedByMe
-            heart.text = post.likeCount.toString()
-            eyes.text = post.lookCount.toString()
-            share.text = post.shareCount.toString()
+            heart.text = clickCount(post.likeCount)
+            eyes.text = clickCount(post.lookCount)
+            share.text = clickCount(post.shareCount)
+
+             if (!post.video.isNullOrEmpty()) {
+                 videoGroup.visibility = View.VISIBLE
+             } else {
+                 videoGroup.visibility = View.GONE
+             }
 
             heart.setOnClickListener {
                 onInteractionListener.onLike(post)
@@ -56,6 +64,12 @@ class PostViewHolder(
             }
             eyes.setOnClickListener {
                 onInteractionListener.onEyes(post)
+            }
+            image.setOnClickListener {
+                onInteractionListener.onPlayVideo(post)
+            }
+            play.setOnClickListener {
+                onInteractionListener.onPlayVideo(post)
             }
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {

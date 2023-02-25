@@ -1,6 +1,7 @@
 package ru.netology.nmedia.activity
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -67,6 +68,12 @@ class MainActivity : AppCompatActivity() {
                 viewModel.notEdit()
             }
 
+            override fun onPlayVideo(post: Post) {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
+                val playVideoIntent =
+                    Intent.createChooser(intent, getString(R.string.choose_play_video))
+                startActivity(playVideoIntent)
+            }
         }
         )
         binding.list.adapter = adapter
