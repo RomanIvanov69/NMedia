@@ -50,11 +50,11 @@ class PostViewHolder(
             eyes.text = clickCount(post.lookCount)
             share.text = clickCount(post.shareCount)
 
-             if (!post.video.isNullOrEmpty()) {
-                 videoGroup.visibility = View.VISIBLE
-             } else {
-                 videoGroup.visibility = View.GONE
-             }
+            if (!post.video.isNullOrEmpty()) {
+                videoGroup.visibility = View.VISIBLE
+            } else {
+                videoGroup.visibility = View.GONE
+            }
 
             heart.setOnClickListener {
                 onInteractionListener.onLike(post)
