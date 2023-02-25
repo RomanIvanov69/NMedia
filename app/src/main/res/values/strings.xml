@@ -14,6 +14,8 @@ bigger, aim higher, run faster. Our mission
 changes -> <a href="https://netology.ru">http://netolo.gy/fyb</a></string>
 
     <string name="description_post_save" translatable="false">Post save</string>
+    <string name="image_video" translatable="false">Video image</string>
+    <string name="play_video" translatable="false">Play video button</string>
     <string name="add_post" translatable="false">Add post</string>
     <string name="author">Netology. University of Internet Professions of the Future</string>
     <string name="time">21 may at 18:36</string>

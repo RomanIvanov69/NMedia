@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="content" />
+        app:constraint_referenced_ids="content,image" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
@@ -122,6 +122,36 @@
         app:layout_constraintEnd_toStartOf="@id/menu"
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toBottomOf="@id/author" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/videoGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="image,play" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:contentDescription="@string/image_video"
+        app:layout_constraintBottom_toTopOf="@id/barrier1"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:srcCompat="@drawable/video" />
+
+    <ImageButton
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/play_video"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="@id/image"
+        app:layout_constraintStart_toStartOf="@id/image"
+        app:layout_constraintBottom_toBottomOf="@id/image"
+        app:layout_constraintTop_toTopOf="@id/image"
+        app:srcCompat="@drawable/baseline_play_circle_24" />
+
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/buttonsBarrier"

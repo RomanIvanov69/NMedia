@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 val shareIntent =
                     Intent.createChooser(intent, getString(R.string.chooser_share_post))
                 startActivity(shareIntent)
-                viewModel.likeById((post.id))
+                viewModel.share((post.id))
             }
 
             override fun onLike(post: Post) {
