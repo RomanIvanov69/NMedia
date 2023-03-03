@@ -33,3 +33,5 @@
 - Задача. YouTube Video
 
 # 3.3. Хранение данных
+# 3.4. Fragments, FragmentManager
+- Задача. Details
