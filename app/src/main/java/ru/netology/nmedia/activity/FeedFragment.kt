@@ -73,6 +73,15 @@ class FeedFragment : Fragment() {
                     Intent.createChooser(intent, getString(R.string.choose_play_video))
                 startActivity(playVideoIntent)
             }
+
+            override fun onOnePost(post: Post) {
+                findNavController().navigate(
+                    R.id.action_feedFragment_to_postFragment,
+                    Bundle().apply {
+                        textArg = post.id.toString()
+                    }
+                )
+            }
         }
         )
         binding.list.adapter = adapter

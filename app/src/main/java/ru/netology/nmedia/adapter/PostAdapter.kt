@@ -20,6 +20,7 @@ interface OnInteractionListener {
     fun onEyes(post: Post) {}
     fun onCancelEdit(post: Post) {}
     fun onPlayVideo(post: Post) {}
+    fun onOnePost(post: Post) {}
 }
 
 class PostAdapter(private val onInteractionListener: OnInteractionListener) :
@@ -70,6 +71,9 @@ class PostViewHolder(
             }
             play.setOnClickListener {
                 onInteractionListener.onPlayVideo(post)
+            }
+            binding.root.setOnClickListener {
+                onInteractionListener.onOnePost(post)
             }
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
