@@ -4,37 +4,33 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
-import androidx.activity.result.launch
-import androidx.activity.viewModels
-import kotlinx.android.synthetic.main.activity_new_post.*
-import kotlinx.android.synthetic.main.card_post.view.*
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
+import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.adapter.OnInteractionListener
-import ru.netology.nmedia.adapter.PostAdapter
-import ru.netology.nmedia.databinding.ActivityMainBinding
+import ru.netology.nmedia.adapter.PostViewHolder
+import ru.netology.nmedia.databinding.PostFragmentBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
-import ru.netology.nmedia.util.AndroidUtils
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val viewModel: PostViewModel by viewModels()
-
-        val newPostContract =
-            registerForActivityResult(NewPostActivity.NewPostContract) { content ->
-                content ?: return@registerForActivityResult
-                viewModel.editContent(content)
-                viewModel.save()
-
+class PostFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding = PostFragmentBinding.inflate(inflater, container, false)
+        val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
+        val postViewHolder = PostViewHolder(binding.post, object : OnInteractionListener {
+            override fun onLike(post: Post) {
+                viewModel.likeById(post.id)
             }
 
-        val adapter = PostAdapter(object : OnInteractionListener {
             override fun onShare(post: Post) {
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
@@ -47,10 +43,6 @@ class MainActivity : AppCompatActivity() {
                 viewModel.share((post.id))
             }
 
-            override fun onLike(post: Post) {
-                viewModel.likeById(post.id)
-            }
-
             override fun onEyes(post: Post) {
                 viewModel.eyes(post.id)
             }
@@ -61,7 +53,12 @@ class MainActivity : AppCompatActivity() {
 
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
-                newPostContract.launch(post.content)
+                findNavController().navigate(
+                    R.id.action_postFragment_to_newPostFragment,
+                    Bundle().apply {
+                        textArg = post.content
+                    }
+                )
             }
 
             override fun onCancelEdit(post: Post) {
@@ -74,20 +71,17 @@ class MainActivity : AppCompatActivity() {
                     Intent.createChooser(intent, getString(R.string.choose_play_video))
                 startActivity(playVideoIntent)
             }
-        }
-        )
-        binding.list.adapter = adapter
-        viewModel.data.observe(this) { posts ->
-            val newPost = adapter.currentList.size < posts.size
-            adapter.submitList(posts) {
-                if (newPost) {
-                    binding.list.smoothScrollToPosition(0)
-                }
+        })
+        viewModel.data.observe(viewLifecycleOwner) { posts ->
+            val id = arguments?.textArg?.toLong()
+            val post = posts.find { it.id == id } ?: kotlin.run {
+                findNavController().navigateUp()
+                return@observe
             }
+            postViewHolder.bind(post)
         }
-        binding.add.setOnClickListener {
-            newPostContract.launch(null)
-        }
+        return binding.root
     }
 }
+
 
